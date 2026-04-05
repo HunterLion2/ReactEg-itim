@@ -4,7 +4,6 @@ import "./index.css";
 
 function App() {
   return (
-
     // Burada kullanılan <> </> taglları aslında div gibi dir fakat görünmez sınırlandırıcıdırlar.
     <>
       <Header />
@@ -27,26 +26,52 @@ function Header() {
 }
 
 function MovieList() {
+  const movie_list = [
+    {
+      id: 1,
+      image: "1.jpg",
+      title: "Kaptan Amerika",
+      description: "Güzel bir film",
+    },
+    {
+      id: 2,
+      image: "2.jpg",
+      title: "Araba Hırsızları",
+      description: "Güzel bir film",
+    },
+    {
+      id: 3,
+      image: "3.jpg",
+      title: "Araba Hırsızları",
+      description: "Güzel bir film",
+    },
+    {
+      id: 4,
+      image: "4.jpg",
+      title: "Araba Hırsızları",
+      description: "Güzel bir film",
+    },
+  ];
+
+  // Burada map içerisinde kullanılan birinci değer bildiğimiz liste içerisindeki alan değer , index değeri ise bu değerler içerisindeki değerlerin kaçıncı sırada olduğunu belirler.
   return (
     <div>
       <h2>Movie List</h2>
       <div id="movie-list">
-        <Movie />
-        <Movie />
-        <Movie />
-        <Movie />
-        <Movie />
-        <Movie />
+        {movie_list.map((m, index) => (
+          <Movie key={index} movieObj={m} />
+        ))}
       </div>
     </div>
   );
 }
 
-function Movie() {
+function Movie({ movieObj }) {
   return (
     <div className="movie">
-      <h3>Movie</h3>
-      <p>Film açıklaması</p>
+      <img src={"/img/" + movieObj.image} alt="" />
+      <h3>{movieObj.title}</h3>
+      <p>{movieObj.description}</p>
     </div>
   );
 }
