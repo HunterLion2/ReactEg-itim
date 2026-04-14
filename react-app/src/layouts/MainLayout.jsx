@@ -21,7 +21,9 @@ const MainLayout = () => {
       <main>
         {/* Buranın içerisine Route da tabnımlamış olduğumuz Children değerlerden hangisi seçili ise onun bilgisi gelir. */}
         <Outlet />
+        
       </main>
+
     </>
   );
 };

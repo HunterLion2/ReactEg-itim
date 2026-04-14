@@ -16,7 +16,8 @@ const routes = createBrowserRouter([
       { index: "", element: <Home /> },
       // Movies içerisine gelen değerler film APİ'si içerisinden gelen değerler olucak.
       { path: "movies", element: <Movies /> },
-      { path: "movies/1", element: <MovieDetails /> },
+      // Burada : kullanmak demek sayı değeri geliceğini belirtiriz.
+      { path: "movies/:id", element: <MovieDetails /> },
     ],
   },
 ]);
