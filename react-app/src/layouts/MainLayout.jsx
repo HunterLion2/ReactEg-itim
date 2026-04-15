@@ -1,26 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router";
+import Movies from "../pages/Movies";
 
 const MainLayout = () => {
+
+  const [searchText, setSearchText] = useState("");
+
   return (
     <>
-      <nav
-        className="navbar navbar-expand-lg bg-warning border-bottom border-body"
-        data-bs-theme="light"
-      >
+      <nav className="navbar navbar-expand-lg bg-warning border-bottom border-body" data-bs-theme="light">
         <div className="container">
           <NavLink className="btn" to="/">Home</NavLink>
-          <NavLink className="btn" to="/movies" end>
+          <NavLink className="btn" to="/movies">
             Movies
           </NavLink>
-          <NavLink className="btn" to="/movies/1" end>
-            Movie Details
-          </NavLink>
+          <input 
+            type="text"
+            id="searchButton" 
+            placeholder="Film Araması" 
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
         </div>
       </nav>
       <main>
         {/* Buranın içerisine Route da tabnımlamış olduğumuz Children değerlerden hangisi seçili ise onun bilgisi gelir. */}
-        <Outlet />
+        <Outlet context={{ searchText }} />
         
       </main>
 
