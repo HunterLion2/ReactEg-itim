@@ -5,6 +5,8 @@ import Movies from "./pages/Movies";
 import MovieDetails from "./pages/MovieDetails";
 import MainLayout from "./layouts/MainLayout";
 
+
+// Route oluşturmak için kullanılır createBrowserRouter.
 const routes = createBrowserRouter([
 
   {
@@ -13,7 +15,7 @@ const routes = createBrowserRouter([
     // sonrasında path ile aynı route değerini başka bir child elementine daha verirsek o zaman ikisini birden aç anlamına gelir.
     element: <MainLayout />,
     children: [
-      { index: "", element: <Home /> },
+      { index: "/", element: <Home /> },
       // Movies içerisine gelen değerler film APİ'si içerisinden gelen değerler olucak.
       { path: "movies", element: <Movies /> },
       // Burada : kullanmak demek sayı değeri geliceğini belirtiriz.

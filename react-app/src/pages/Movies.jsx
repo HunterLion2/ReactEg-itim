@@ -4,6 +4,8 @@ import ErrorMessage from "../components/ErrorMessage";
 import MovieList from "../components/MovieList";
 import { useOutletContext } from "react-router";
 
+// NOT: FİMLER YÜKLENDİĞİ ZAMAN SCROLL EN BAŞA GELİYOR.
+
 const apiUrl = import.meta.env.VITE_TMDB_API_URL;
 const api_key = import.meta.env.VITE_TMDB_API_KEY;
 
@@ -31,7 +33,7 @@ const Movies = () => {
 
         if (searchText) {
           const response = await fetch(
-            `${apiUrl}/search/movie?api_key=${api_key}&query=${encodeURIComponent(searchText)}&page=${pages}&language=${language}`,
+            `${apiUrl}/search/movie?api_key=${api_key}&query=${encodeURIComponent(searchText)}&page=${pages}&language=${language}`
           );
 
           if (!response.ok) {
@@ -42,13 +44,13 @@ const Movies = () => {
 
           if (data.results) {
             setMovies((prevMovies) =>
-              pages === 1 ? data.results : [...prevMovies, ...data.results],
+              pages === 1 ? data.results : [...prevMovies, ...data.results]
             );
           }
           setError("");
         } else {
           const response = await fetch(
-            `${apiUrl}/movie/popular?api_key=${api_key}&page=${pages}&language=${language}`,
+            `${apiUrl}/movie/popular?api_key=${api_key}&page=${pages}&language=${language}`
           );
 
           if (!response.ok) {
@@ -59,16 +61,15 @@ const Movies = () => {
 
           if (data.results) {
             setMovies((prevMovies) =>
-              pages === 1 ? data.results : [...prevMovies, ...data.results],
+              pages === 1 ? data.results : [...prevMovies, ...data.results]
             );
           }
           setError("");
         }
-      } catch (error) {
-        setError(error.message);
-      } finally {
         setLoading(false);
         setScroll(false);
+      } catch (error) {
+        setError(error.message);
       }
     }
 
@@ -81,9 +82,8 @@ const Movies = () => {
         const nearBottom =
           window.innerHeight + window.scrollY >=
           document.documentElement.scrollHeight;
-
         if (nearBottom) {
-          setScroll(nearBottom);
+          setScroll(true);
           setPage(page++);
           console.log("Ekranın sonu ");
         }

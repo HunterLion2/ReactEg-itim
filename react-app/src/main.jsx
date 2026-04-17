@@ -7,9 +7,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
 import Header from "./components/Header";
+import { ThemeContext } from "./contexts/ThemeContext";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <ThemeProvider value={{theme: "light"}}>
+      <App />
+    </ThemeProvider>
   </StrictMode>
 );
