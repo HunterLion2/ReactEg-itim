@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router";
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
 import SimilarMovies from "./SimilarMovies";
+import Actors from "../components/Actors";
+import { UserContext } from "../contexts/UserContext";
 
 const apiUrl = "https://api.themoviedb.org/3";
 const api_key = "9394fb08eb73fd225d415dd17bb8eb01";
@@ -15,11 +17,16 @@ const MovieDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const { addToWatchList, removeFromWatchList, watchList } =
+    useContext(UserContext);
+
+  const isAdded = watchList?.find((i) => i.id == movie?.id);
+
   useEffect(() => {
     async function getMovie() {
       try {
         const response = await fetch(
-          `${apiUrl}/movie/${id}?api_key=${api_key}&language=${language}&append_to_response=credits`,
+          `${apiUrl}/movie/${id}?api_key=${api_key}&language=${language}&append_to_response=credits`
         );
 
         if (!response.ok) {
@@ -55,15 +62,6 @@ const MovieDetails = () => {
         }}
       >
         <div className="img-overlay">
-          
-          <div className="container">
-            <Link to="/movies">
-              <button className="btn btn-outline-warning mt-5">
-                <i class="fa-solid fa-arrow-left"></i>
-              </button>
-            </Link>
-          </div>
-
           <div className="container d-flex align-items-center justify-content-center min-vh-100">
             <div className="row">
               <div className="col-md-3 d-none d-lg-block">
@@ -73,16 +71,7 @@ const MovieDetails = () => {
                   className="img-fluid rounded shadow img-thumbnail"
                 />
               </div>
-              <div 
-                className="col-md-9"
-                style={{
-                  backgroundColor: "rgba(255, 255, 255, 0.33)",
-                  backdropFilter: 'blur(5px)',
-                  borderRadius: 20,
-                  padding: 20,
-                  paddingInline: 10
-                }}
-              >
+              <div className="col-md-9">
                 <h1 className="display-4">{movie.title}</h1>
                 <p>
                   {movie.release_date} <i className="bi bi-dot text-white"></i>
@@ -93,10 +82,24 @@ const MovieDetails = () => {
                   {movie.runtime} dk
                 </p>
                 <p>
-                  <span className="badge bg-warning">
+                  <span className="badge bg-warning fs-6">
                     {Math.round(movie.vote_average * 10)}%
                   </span>
+                  <span className="badge bg-danger fs-6 ms-2 pointer">
+                    {isAdded ? (
+                      <i
+                        className="bi bi-heart-fill"
+                        onClick={() => removeFromWatchList(movie)}
+                      ></i>
+                    ) : (
+                      <i
+                        className="bi bi-heart"
+                        onClick={() => addToWatchList(movie)}
+                      ></i>
+                    )}
+                  </span>
                 </p>
+
                 {movie.overview && (
                   <p className="lead">
                     <strong>Özet:</strong> {movie.overview}
@@ -109,11 +112,11 @@ const MovieDetails = () => {
                   </p>
                   <p className="d-flex flex-column text-center">
                     <span> Yönetmen</span>{" "}
-                    <span>{movie.credits.crew[0].name}</span>
+                    <span>{movie.credits.crew[0]?.name}</span>
                   </p>
                   <p className="d-flex flex-column text-center">
                     <span>Senarist</span>{" "}
-                    <span>{movie.credits.crew[1].name}</span>
+                    <span>{movie.credits.crew[1]?.name}</span>
                   </p>
                 </div>
               </div>
@@ -121,32 +124,7 @@ const MovieDetails = () => {
           </div>
         </div>
       </div>
-
-      <div className="container my-3">
-        <div className="card">
-          <div className="card-header">
-            <h5 className="card-title">Kadro</h5>
-          </div>
-          <div className="card-body">
-            <div className="row">
-              {movie.credits.cast.slice(0, 12).map((actor) => (
-                <div className="col-md-2" key={actor.id}>
-                  <img
-                    src={
-                      "https://image.tmdb.org/t/p/original/" +
-                      actor.profile_path
-                    }
-                    alt={actor.name}
-                    className="img-fluid"
-                  />
-                  <p>{actor.name}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <Actors actors={movie.credits.cast} />
       <SimilarMovies movieId={id} />
     </>
   );

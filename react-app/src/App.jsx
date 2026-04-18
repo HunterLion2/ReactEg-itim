@@ -4,22 +4,19 @@ import Home from "./pages/Home";
 import Movies from "./pages/Movies";
 import MovieDetails from "./pages/MovieDetails";
 import MainLayout from "./layouts/MainLayout";
+import SearchResults from "./pages/SearchResults";
+import UserWatchList from "./pages/UserWatchList";
 
-
-// Route oluşturmak için kullanılır createBrowserRouter.
 const routes = createBrowserRouter([
-
   {
     path: "/",
-    // Buradaki element'in anlamı şudur "/" route'una gidince ilk önce açılıcak olan bölüm MainLayout'dur sonrasında aşşağında sonrasında açılıcak olan children pages'leri yazdık.
-    // sonrasında path ile aynı route değerini başka bir child elementine daha verirsek o zaman ikisini birden aç anlamına gelir.
     element: <MainLayout />,
     children: [
-      { index: "/", element: <Home /> },
-      // Movies içerisine gelen değerler film APİ'si içerisinden gelen değerler olucak.
+      { index: true, element: <Home /> },
       { path: "movies", element: <Movies /> },
-      // Burada : kullanmak demek sayı değeri geliceğini belirtiriz.
       { path: "movies/:id", element: <MovieDetails /> },
+      { path: "search", element: <SearchResults /> },
+      { path: "watchlist", element: <UserWatchList /> },
     ],
   },
 ]);

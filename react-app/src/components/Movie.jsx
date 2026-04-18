@@ -1,16 +1,10 @@
-import { Link } from "react-router" 
+import { Link } from "react-router";
 
-export default function Movie({ movieObj, onAddToList, onSelectedMovie }) {
-
-  // useParams değeri ile link ile beraber gelen değeri tutmamızı sağlar.
-
+export default function Movie({ movieObj }) {
   return (
     <div className="col">
-      <div
-        className="card movie position-relative"
-        onClick={() => onSelectedMovie(movieObj)}
-      >
-        <Link to={`/movies/${movieObj.id}`} className="strecthed-link">
+      <div className="card movie position-relative h-100">
+        <Link to={`/movies/${movieObj.id}`}>
           <img
             src={"https://image.tmdb.org/t/p/original/" + movieObj.poster_path}
             alt=""
@@ -20,12 +14,6 @@ export default function Movie({ movieObj, onAddToList, onSelectedMovie }) {
 
         <div className="card-body">
           <h2 className="h6 card-title">{movieObj.title}</h2>
-          <button
-            className="btn btn-link fs-5 text-danger position-absolute top-0 start-0"
-            onClick={() => onAddToList(movieObj)}
-          >
-            <i className="bi bi-plus-circle"></i>
-          </button>
         </div>
       </div>
     </div>

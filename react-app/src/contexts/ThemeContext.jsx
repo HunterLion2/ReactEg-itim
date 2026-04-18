@@ -1,25 +1,19 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const ThemeContext = createContext();
 
-export function ThemeProvider({children}) {
+export function ThemeContextProvider({ children }) {
+  const storedTheme = localStorage.getItem("theme");
+  const initialTheme = storedTheme ? JSON.parse(storedTheme) : "light";
+  const [theme, setTheme] = useState(initialTheme);
 
-    const [bg, setBg] = useState("dark");
-    const [item,setItem] = useState("white");
+  useEffect(() => {
+    localStorage.setItem("theme", JSON.stringify(theme));
+  }, [theme]);
 
-    const toggleTheme = () => {
-        setBg((prev) => (prev === "dark" ? "light" : "dark"));
-        setItem((prev) => (prev === "white" ? "black" : "white"));
-    }
-
-    return(
-        // Burada kullandığımız Provider değeri component'lerin tek bir ana merkez üzerinden iletişim kurmasını sağlar.
-        // Buranın içerisine birden fazla değer gönderebiliriz ve bunları üst tarafta kontrol edebilirizç
-        <ThemeContext.Provider value={{bg, item, toggleTheme}}>
-            {children}
-        </ThemeContext.Provider>
-    );
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
 }
-
-
-
