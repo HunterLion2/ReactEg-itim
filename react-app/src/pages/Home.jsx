@@ -3,6 +3,7 @@ import SearchForm from "../components/SearchForm";
 import Movies from "./Movies";
 
 const Home = () => {
+
   return (
     <>
       <div id="home">
@@ -11,11 +12,11 @@ const Home = () => {
             <div className="row">
               <div className="col-12 col-lg-7 mx-auto text-center text-white">
                 <h1 className="display-2" style={{color:"black"}}>Hoş Geldiniz!</h1>
-                <p className="lead">
+                <p className="lead" style={{color:"black"}}>
                   Keşfedilecek milyonlarca film, TV şovu ve kişi. Şimdi
                   keşfedin.
                 </p>
-                <SearchForm />
+                <SearchForm  /> 
               </div>
             </div>
           </div>

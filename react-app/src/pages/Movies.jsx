@@ -4,8 +4,6 @@ import ErrorMessage from "../components/ErrorMessage";
 import MovieList from "../components/MovieList";
 import { useOutletContext } from "react-router";
 
-// NOT: FİMLER YÜKLENDİĞİ ZAMAN SCROLL EN BAŞA GELİYOR.
-
 const apiUrl = import.meta.env.VITE_TMDB_API_URL;
 const api_key = import.meta.env.VITE_TMDB_API_KEY;
 
@@ -21,9 +19,10 @@ const Movies = () => {
 
   const { searchText } = useOutletContext();
 
+
   useEffect(() => {
     setPage(1);
-    setMovies([]);
+    setMovies([]);  
   }, [searchText]);
 
   useEffect(() => {
@@ -32,6 +31,8 @@ const Movies = () => {
         setLoading(true);
 
         if (searchText) {
+          setScroll(false);
+
           const response = await fetch(
             `${apiUrl}/search/movie?api_key=${api_key}&query=${encodeURIComponent(searchText)}&page=${pages}&language=${language}`
           );
@@ -47,7 +48,6 @@ const Movies = () => {
               pages === 1 ? data.results : [...prevMovies, ...data.results]
             );
           }
-          setError("");
         } else {
           const response = await fetch(
             `${apiUrl}/movie/popular?api_key=${api_key}&page=${pages}&language=${language}`
@@ -91,7 +91,7 @@ const Movies = () => {
     }
 
     Scrools();
-  }, [scroll == false]);
+  }, [scroll == false, searchText==false]);
 
   if (loading) return <Loading />;
   if (error) return <ErrorMessage message={error} />;
