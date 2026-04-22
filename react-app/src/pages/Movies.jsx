@@ -56,7 +56,7 @@ const Movies = () => {
       setPage((prev) => prev + 1);
       setScroll(false);
     }
-  }, [scroll, loading]);
+  }, [loading]);
 
   useEffect(() => {
     async function movieList() {

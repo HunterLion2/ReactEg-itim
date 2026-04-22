@@ -63,16 +63,24 @@ const MovieDetails = () => {
       >
         <div className="img-overlay">
           <div className="container d-flex align-items-center justify-content-center min-vh-100">
-            <div className="row">
+            <div className="row ">
               <div className="col-md-3 d-none d-lg-block">
                 <img
                   src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                   alt={movie.title}
-                  className="img-fluid rounded shadow img-thumbnail"
+                  className="rounded shadow img-thumbnail"
+                  style={{
+                    backgroundColor: "#cbcbcb2e",
+                    border: "none",
+                    borderRadius: 20,
+                    borderImage: 20
+
+
+                  }}
                 />
               </div>
               <div className="col-md-9">
-                <h1 className="display-4">{movie.title}</h1>
+                <h1 className="display-4 fw-bold">{movie.title}</h1>
                 <p>
                   {movie.release_date} <i className="bi bi-dot text-white"></i>
                   <span className="text-white">
@@ -81,10 +89,31 @@ const MovieDetails = () => {
                   <i className="bi bi-dot text-white"></i>
                   {movie.runtime} dk
                 </p>
+                {movie.overview && (
+                  <p className="lead">
+                    <strong>Özet:</strong> {movie.overview}
+                  </p>
+                )}
                 <p>
-                  <span className="badge bg-warning fs-6">
-                    {Math.round(movie.vote_average * 10)}%
-                  </span>
+
+                  {(Math.round(movie.vote_average * 10)) <= 50 && (
+                    <span className="badge bg-danger fs-6">
+                      {Math.round(movie.vote_average * 10)}%
+                    </span>
+                  )}
+
+                  {(Math.round(movie.vote_average * 10)) > 50 && (Math.round(movie.vote_average * 10)) < 71 && (
+                    <span className="badge bg-warning fs-6">
+                      {Math.round(movie.vote_average * 10)}%
+                    </span>
+                  )}
+
+                  {(Math.round(movie.vote_average * 10)) >= 72 && (Math.round(movie.vote_average * 10)) < 100 && (
+                    <span className="badge bg-success fs-6">
+                      {Math.round(movie.vote_average * 10)}%
+                    </span>
+                  )}
+
                   <span className="badge bg-danger fs-6 ms-2 pointer">
                     {isAdded ? (
                       <i
@@ -100,12 +129,8 @@ const MovieDetails = () => {
                   </span>
                 </p>
 
-                {movie.overview && (
-                  <p className="lead">
-                    <strong>Özet:</strong> {movie.overview}
-                  </p>
-                )}
-                <div className="d-flex flex-column flex-md-row justify-content-between align-items-start">
+                
+                <div className="d-flex fw-bold pt-4 flex-column flex-md-row justify-content-between align-items-start">
                   <p className="d-flex flex-column text-center">
                     <span>Yapımcı </span>
                     <span>{movie.production_companies[0].name}</span>
