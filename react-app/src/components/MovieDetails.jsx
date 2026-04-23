@@ -53,9 +53,6 @@ export default function MovieDetails({ movieObj, onClose }) {
               }
               alt=""
               className="img-fluid"
-              style={{
-                borderRadius: 10
-              }}
             />
             <h3>{movieObj.title}</h3>
             <p>{movieObj.overview}</p>

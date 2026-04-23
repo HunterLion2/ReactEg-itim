@@ -11,29 +11,11 @@
     background-color: rgba(0, 0, 0, 0.6);
 }
 
-.text-group{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.display-2  {
-    font-style: italic;
-}
-
-.lead {
-    font-size: 15px;
-}
-
 #home {
     background-image: url(https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fGhvbWV8ZW58MHx8fHwxNjg3NTY5NzA1&ixlib=rb-4.0.3&q=80&w=1080);
     background-size: cover;
     background-position: center;
-    min-height: 850px;
+    min-height: 300px;
     position: relative;
 }
 
