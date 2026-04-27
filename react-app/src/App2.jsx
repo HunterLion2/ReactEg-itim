@@ -12,6 +12,7 @@ import WatchListButton from "./components/WatchListButton";
 import MovieList from "./components/MovieList";
 import WatchList from "./components/WatchList";
 import MovieDetails from "./components/MovieDetails";
+import MovieCategoryList from "./components/MovieCategoryList";
 
 const api_key = "9394fb08eb73fd225d415dd17bb8eb01";
 const page = 1;
@@ -88,6 +89,7 @@ export default function App2() {
           movies={watchListMovies}
           onSetIsWatchListOpen={setIsWatchListOpen}
         />
+        <MovieCategoryList movies={movies}/>
       </Header>
 
       <Main>

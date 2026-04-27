@@ -2,6 +2,7 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import Home from "./pages/Home";
 import Movies from "./pages/Movies";
+import Category from "./pages/Category";
 import MovieDetails from "./pages/MovieDetails";
 import MainLayout from "./layouts/MainLayout";
 import SearchResults from "./pages/SearchResults";
@@ -10,12 +11,17 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 
 const routes = createBrowserRouter([
+  { 
+    path: "/",
+    element:  <Home /> 
+  },
+
   {
     path: "/",
     element: <MainLayout />,
     children: [
-      { index: true, element: <Home /> },
       { path: "movies", element: <Movies /> },
+      { path: "category", element: <Category /> },
       { path: "movies/:id", element: <MovieDetails /> },
       { path: "search", element: <SearchResults /> },
       { path: "watchlist", element: <UserWatchList /> },
@@ -23,6 +29,7 @@ const routes = createBrowserRouter([
       { path: "register", element: <Register /> },
     ],
   },
+  
 ]);
 
 function App() {

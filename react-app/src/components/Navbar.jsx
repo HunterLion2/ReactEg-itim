@@ -20,7 +20,7 @@ export default function Navbar() {
       <div className="container">
         <Logo />
         <button
-          className="navbar-toggler"
+          className="navbar-toggler px-5"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
@@ -40,6 +40,11 @@ export default function Navbar() {
             <li className="nav-item">
               <NavLink className="nav-link" to="/movies">
                 Movies
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/category">
+                Category
               </NavLink>
             </li>
           </ul>

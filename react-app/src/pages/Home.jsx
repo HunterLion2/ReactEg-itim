@@ -7,11 +7,11 @@ const Home = () => {
     <>
       <div id="home">
         <div className="img-overlay">
-          <div className="container pt-5">
+          <div className="container">
             <div className="row">
-              <div className="col-12 col-lg-7 mx-auto text-center text-white">
-                <h1 className="display-2">Hoş Geldiniz!</h1>
-                <p className="lead">
+              <div className="col-12 col-lg-6 mx-auto text-center text-white" id="general">
+                <h1 className="display-4 fw-bold">Hoş Geldiniz!</h1>
+                <p className="lead fst-italic">
                   Keşfedilecek milyonlarca film, TV şovu ve kişi. Şimdi
                   keşfedin.
                 </p>
