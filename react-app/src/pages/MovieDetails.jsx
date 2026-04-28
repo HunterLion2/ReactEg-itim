@@ -26,7 +26,7 @@ const MovieDetails = () => {
     async function getMovie() {
       try {
         const response = await fetch(
-          `${apiUrl}/movie/${id}?api_key=${api_key}&language=${language}&append_to_response=credits`
+          `${apiUrl}/movie/${id}?api_key=${api_key}&language=${language}&append_to_response=credits`,
         );
 
         if (!response.ok) {
@@ -35,11 +35,11 @@ const MovieDetails = () => {
 
         const data = await response.json();
         setMovie(data);
+        scrollTo(0,0)
         setError("");
       } catch (error) {
         setError(error.message);
       }
-
       setLoading(false);
     }
 
