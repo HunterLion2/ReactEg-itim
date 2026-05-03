@@ -1,6 +1,8 @@
 import Movie from "./Movie";
+// MovieList.jsx dosyasında değeri ekrana yazdırırken {{pages}} yerine {pages}
+// kullanmalısın (React'te ekrana değişken yazdırmak için tek süslü parantez kullanılır).
 
-export default function MovieList({ movies, title }) {
+export default function MovieList({ movies, title , pages, upperPages, lowerPages}) {
   return (
     <section className="container py-4">
       <header className="d-flex align-items-center justify-content-between mb-3">
@@ -25,7 +27,7 @@ export default function MovieList({ movies, title }) {
       ) : (
         <>
           <div
-            id="movie-list" 
+            id="movie-list"
             className="row row-cols-3 row-cols-md-4 row-cols-lg-6 g-2"
           >
             {movies.map((m, index) => (
@@ -33,9 +35,18 @@ export default function MovieList({ movies, title }) {
             ))}
           </div>
 
-          <div className="container mx-5 text-center align-center">
-              <button>
-              </button>
+          <div className="container mt-3 mx-5">
+            <div className="row">
+              <div className="col-lg-6">
+                <button className="btn btn-outline-warning" onClick={() => lowerPages(pages--)}><i class="fa-solid fa-caret-left"></i></button>
+              </div>
+              <div className="col-lg-5">
+                {pages}
+              </div>
+              <div className="col-lg-1">
+                <button className="btn btn-outline-warning" onClick={() => upperPages(pages++)}><i class="fa-solid fa-caret-right"></i></button>
+              </div>
+            </div>
           </div>
         </>
       )}

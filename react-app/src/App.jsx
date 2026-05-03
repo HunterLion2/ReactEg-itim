@@ -11,15 +11,11 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 
 const routes = createBrowserRouter([
-  { 
-    path: "/",
-    element:  <Home /> 
-  },
-
   {
     path: "/",
     element: <MainLayout />,
     children: [
+      { path: "/", element: <Home />},
       { path: "movies", element: <Movies /> },
       { path: "category", element: <Category /> },
       { path: "movies/:id", element: <MovieDetails /> },
@@ -29,7 +25,6 @@ const routes = createBrowserRouter([
       { path: "register", element: <Register /> },
     ],
   },
-  
 ]);
 
 function App() {

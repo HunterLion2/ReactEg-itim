@@ -6,14 +6,15 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import ThemeSelector from "./ThemeSelector";
 import { UserContext } from "../contexts/UserContext";
 
+
+
 export default function Navbar() {
   const { theme, setTheme } = useContext(ThemeContext);
   const { watchList } = useContext(UserContext);
-
   return (
+
     <nav
-      className={`navbar navbar-expand-lg bg-${theme} border-bottom border-body`}
-      data-bs-theme={theme}
+      className={`navbar navbar-expand-lg p-3`}
     >
       <ThemeSelector />
 
@@ -42,34 +43,33 @@ export default function Navbar() {
                 Movies
               </NavLink>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <NavLink className="nav-link" to="/category">
                 Category
               </NavLink>
-            </li>
+            </li> */}
           </ul>
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/login">
+              <NavLink className="nav-link fw-bold" to="/login">
                 Login
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/register">
+              <NavLink className="nav-link fw-bold" to="/register">
                 Register
               </NavLink>
             </li>
           </ul>
-          <SearchForm />
-          <Link
+          {/* <Link
             to="/watchlist"
-            className={`btn btn-${theme} border position-relative ms-1`}
+            className={`btn btn-transparent border position-relative ms-1`}
           >
             <i className="bi bi-heart-fill"></i>
             <span className="position-absolute top-0 start-100 badge rounded-pill bg-danger translate-middle">
               {watchList.length}
             </span>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </nav>

@@ -5,12 +5,12 @@ import MovieList from "../components/MovieList";
 
 const apiUrl = "https://api.themoviedb.org/3";
 const api_key = "9394fb08eb73fd225d415dd17bb8eb01";
-const page = 1;
 const language = "tr-TR";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -38,12 +38,12 @@ const Movies = () => {
     }
 
     getMovies();
-  }, []);
+  }, [page]);
 
   if (loading) return <Loading />;
   if (error) return <ErrorMessage message={error} />;
 
-  return <MovieList movies={movies} title="Popüler Filmler" />;
+  return <MovieList movies={movies} title="Popüler Filmler" pages={page} upperPages={() => setPage(page + 1)} lowerPages={() => setPage(page > 1 ? page - 1 : 1)}  />;
 };
 
 export default Movies;

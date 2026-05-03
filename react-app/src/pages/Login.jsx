@@ -1,5 +1,6 @@
 import { useContext, useRef } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { href } from "react-router";
 
 export default function Login() {
   const { theme } = useContext(ThemeContext);
@@ -11,11 +12,20 @@ export default function Login() {
 
   function handleFormSubmit(e) {
     e.preventDefault();
-    console.log(email.current.value);
-    console.log(password.current.value);
 
-    email.current.value = "";
-    password.current.value = "";
+    const raw = localStorage.getItem("userinfolist");
+    const list = raw ? JSON.parse(raw) : [];
+
+    for (let i = 0; i < list.length; i++) {
+      if (
+        list[i][0] === email.current.value &&
+        list[i][1] === password.current.value
+      ) {
+        navigate("/");
+        console.log("Başarılı");
+        return;
+      }
+    }
   }
 
   return (

@@ -1,3 +1,7 @@
+export const user_list = [
+  
+]
+
 export const movie_list = [
   {
     id: 1,

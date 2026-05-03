@@ -1,8 +1,10 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
+import ErrorMessage from "../components/ErrorMessage";
 
 export default function Register() {
   const { theme } = useContext(ThemeContext);
+  const [error, setError] = useState("");
   const cardColor = theme === "dark" ? "text-bg-dark" : "text-bg-light";
   const btnColor = theme === "dark" ? "light" : "dark";
 
@@ -11,21 +13,27 @@ export default function Register() {
 
     const formData = new FormData(e.target);
 
-    console.log(formData.get("name"));
-    console.log(formData.get("email"));
-    console.log(formData.get("password"));
-    console.log(formData.get("repassword"));
-    console.log(formData.get("repassword"));
-    console.log(formData.getAll("hobbies"));
-
-    const hobbies = formData.getAll("hobbies");
     const data = Object.fromEntries(formData.entries());
-    data.hobbies = hobbies;
-    console.log(data);
+
+    data.hobbies = formData.getAll("hobbies");
+
+    localStorage.setItem("userinfolist", localStorage.getItem(userinfolist) + JSON.stringify(data));
+
+  }
+
+  function handleRePasswordBlur() {
+    const passwords = document.getElementById("password").value;
+    const repasswords = document.getElementById("repassword").value;
+
+    if (passwords !== repasswords) {
+      setError("Şifreler eşleşmiyor");
+    } else {
+      setError("");
+    }
   }
 
   return (
-    <div className="container py-3">
+    <div className="container p-5">
       <div className="row">
         <div className="col-7 mx-auto">
           <div className={`card border ${cardColor}`}>
@@ -80,7 +88,9 @@ export default function Register() {
                         name="repassword"
                         id="repassword"
                         className="form-control"
+                        onBlur={handleRePasswordBlur}
                       />
+                      {error && <p className="alert alert-danger error p-1 mt-2">{error}</p>}
                     </div>
                   </div>
                   <div className="mb-3">
@@ -96,7 +106,7 @@ export default function Register() {
                           className="form-check-input"
                           value="cars"
                         />
-                        <label htmlFor="cars" className="form-check-label">
+                        <label htmlFor="cars" className={`form-check-label `}>
                           Cars
                         </label>
                       </div>
@@ -128,7 +138,7 @@ export default function Register() {
                   </div>
                 </div>
 
-                <button className={`btn btn-outline-${btnColor}`}>
+                <button type="submit" className={`btn btn-outline-${btnColor}`}>
                   Submit
                 </button>
               </form>

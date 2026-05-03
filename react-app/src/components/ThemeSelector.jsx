@@ -6,9 +6,7 @@ export default function ThemeSelector() {
   return (
     <div className="theme-selector pointer">
       <i
-        className={`ms-2 bi bi-moon-stars${
-          theme === "dark" ? " text-white" : "-fill"
-        }`}
+        className={`ms-2 bi bi-moon-stars-fill`}
         onClick={() => {
           setTheme(theme === "dark" ? "light" : "dark");
         }}
